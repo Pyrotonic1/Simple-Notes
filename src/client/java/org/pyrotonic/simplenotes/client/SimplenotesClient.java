@@ -14,11 +14,12 @@ public class SimplenotesClient implements ClientModInitializer {
     public static KeyBinding OpenMenuKeybind;
     public static final String KEY_CATEGORY_SIMPLENOTES = "key.category.simplenotes.notes";
     public static final String KEY_OPEN_MENU = "key.simplenotes.mainmenu";
+    public static final String MAIN_DIRECTORY_PATH = "simplenotes/";
+    public static final String NOTE_DIRECTORY_PATH = "simplenotes/notes/";
     @Override
     public void onInitializeClient() {
 
-        String MainDirectoryPath = "simplenotes/";
-        String NoteDirectoryPath = "simplenotes/notes/";
+
         OpenMenuKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 KEY_OPEN_MENU,
                 InputUtil.Type.KEYSYM,
@@ -29,7 +30,7 @@ public class SimplenotesClient implements ClientModInitializer {
             while (OpenMenuKeybind.wasPressed()) {
                 client.setScreen(new MainMenu());
             }});
-        File NoteDirectory = new File(NoteDirectoryPath);
+        File NoteDirectory = new File(NOTE_DIRECTORY_PATH);
         NoteDirectory.mkdirs();
     }
 }

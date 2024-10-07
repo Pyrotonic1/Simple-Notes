@@ -10,7 +10,7 @@ public class Simplenotes implements ModInitializer {
     @Override
     public void onInitialize() {
 
-        LOGGER.info("Mod loaded!");
+        LOGGER.info("Simple Notes Initialized!");
 
 
     }

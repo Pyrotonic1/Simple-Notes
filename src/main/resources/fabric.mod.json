@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "simplenotes",
-  "version": "0.1.0",
+  "version": "0.1.1",
 
   "name": "Simple Notes",
   "description": "A simple mod for making simple notes.",
