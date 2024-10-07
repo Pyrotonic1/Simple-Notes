@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "simplenotes",
+  "version": "0.1.0",
+
+  "name": "Simple Notes",
+  "description": "A simple mod for making simple notes.",
+  "authors": ["Pyrotonic"],
+  "contact": {
+    "homepage": "https://modrinth.com/project/simple-notes",
+    "sources": "https://github.com/Pyrotonic1/redstone-tools",
+    "issues": "https://github.com/Pyrotonic1/redstone-tools/issues"
+  },
+
+  "license": "LGPL-2.1-only",
+  "icon": "assets/simplenotes/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": ["org.pyrotonic.simplenotes.client.SimplenotesClient"],
+    "main": ["org.pyrotonic.simplenotes.Simplenotes"]
+  },
+
+  "mixins": [
+    "simplenotes.mixins.json"
+    ,{
+      "config": "simplenotes.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.16.4",
+    "fabric": "*",
+    "minecraft": "1.21.1"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/H7WbRGDwJJ"
+      },
+      "parent": {
+        "id": "simplenotes",
+        "name": "Simple Notes",
+        "icon": "assets/simplenotes/icon.png"
+      }
+    }
+  }
+}
