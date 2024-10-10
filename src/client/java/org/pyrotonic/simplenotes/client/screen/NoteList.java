@@ -39,7 +39,6 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
             client.setScreen(new EditNote());
             }).margins(Insets.of(5)).sizing(Sizing.content(), Sizing.fixed(20));
             ContainerLayout.child(NoteButton);
-            System.out.println(NoteDataHandler.readFilenames()[i]);
         }
 
         rootComponent.child(ContainerLayout);

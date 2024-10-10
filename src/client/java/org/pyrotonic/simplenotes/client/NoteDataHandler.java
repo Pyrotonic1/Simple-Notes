@@ -68,7 +68,6 @@ public class NoteDataHandler {
 
     public static String[] readFilenames() {
         File Path = new File("simplenotes/notes/");
-        System.out.println("Note list:" + Arrays.toString(Path.list()));
         return Path.list();
         }
     }
