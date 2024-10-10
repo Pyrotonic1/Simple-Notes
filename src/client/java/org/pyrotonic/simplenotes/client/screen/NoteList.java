@@ -4,6 +4,7 @@ import io.wispforest.owo.ui.base.BaseOwoScreen;
 import io.wispforest.owo.ui.component.Components;
 import io.wispforest.owo.ui.container.Containers;
 import io.wispforest.owo.ui.container.FlowLayout;
+import io.wispforest.owo.ui.container.ScrollContainer;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
@@ -32,15 +33,20 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
 
         ContainerLayout.child(Components.label(Text.literal("Select a note:")));
 
+        FlowLayout ButtonList = (FlowLayout) Containers.verticalFlow(Sizing.content(), Sizing.content()).horizontalAlignment(HorizontalAlignment.CENTER).margins(Insets.of(5));
+
         for (int i = 0; i < NoteDataHandler.readFilenames().length; i++) {
             int finalI = i;
             Component NoteButton = Components.button(Text.literal(NoteDataHandler.readFilenames()[i].replace(".txt", "")), buttonComponent -> {
             Filename = NoteDataHandler.readFilenames()[finalI];
             client.setScreen(new EditNote());
             }).margins(Insets.of(5)).sizing(Sizing.content(), Sizing.fixed(20));
-            ContainerLayout.child(NoteButton);
+            ButtonList.child(NoteButton);
         }
 
+        ScrollContainer<FlowLayout> ScrollList = Containers.verticalScroll(Sizing.content(), Sizing.fixed(110), ButtonList);
+
+        ContainerLayout.child(ScrollList);
         rootComponent.child(ContainerLayout);
     }
 }
