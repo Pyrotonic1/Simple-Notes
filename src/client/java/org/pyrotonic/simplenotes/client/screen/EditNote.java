@@ -31,7 +31,7 @@ public class EditNote extends BaseOwoScreen<FlowLayout> {
     protected void build(FlowLayout rootComponent) {
 
         TextAreaComponent TextArea = Components.textArea(Sizing.fixed(200), Sizing.fixed(200), CreateNote().getContent());
-        TextBoxComponent FilenameBox = Components.textBox(Sizing.fixed(116), CreateNote().getFilename());
+        TextBoxComponent FilenameBox = Components.textBox(Sizing.fixed(116), CreateNote().getFilename().replace(".txt", ""));
         Component SaveButton = Components.button(Text.literal("Save & Exit"), buttonComponent -> {
             NoteDataHandler.saveContent(TextArea.getText(), FilenameBox.getText());
             client.setScreen(new MainMenu());
