@@ -7,7 +7,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 import org.pyrotonic.simplenotes.client.screen.CreateNote;
-import org.pyrotonic.simplenotes.client.screen.MainMenu;
+import org.pyrotonic.simplenotes.client.screen.NoteList;
 
 import java.io.File;
 
@@ -31,7 +31,7 @@ public class SimplenotesClient implements ClientModInitializer {
         ));
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (OpenMenuKeybind.wasPressed()) {
-                client.setScreen(new MainMenu());
+                client.setScreen(new NoteList());
             }});
         QuickCreateKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             KEY_QUICK_CREATE,
