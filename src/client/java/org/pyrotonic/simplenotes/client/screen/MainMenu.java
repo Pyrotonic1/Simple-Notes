@@ -10,8 +10,6 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 public class MainMenu extends BaseOwoScreen<FlowLayout> {
-    public static Boolean isCreateNote = false;
-    public static Boolean isOpenNote = false;
     @Override
     protected @NotNull OwoUIAdapter<FlowLayout> createAdapter() {
         return OwoUIAdapter.create(this, Containers::verticalFlow);
@@ -29,21 +27,20 @@ public class MainMenu extends BaseOwoScreen<FlowLayout> {
             .verticalAlignment(VerticalAlignment.CENTER);
 
         Component CreateNoteButton = Components.button(Text.literal("Create Note"), buttonComponent -> {
-            isCreateNote = true;
-            isOpenNote = false;
-            client.setScreen(new EditNote());
+                assert client != null;
+                client.setScreen(new CreateNote());
             })
                 .id("create-button")
                 .horizontalSizing(Sizing.fixed(68));
         Component OpenNoteButton = Components.button(Text.literal("Open Note"), buttonComponent -> {
-            isOpenNote = true;
-            isCreateNote = false;
-            client.setScreen(new NoteList());
+                assert client != null;
+                client.setScreen(new NoteList());
             })
                 .id("open-button")
                 .horizontalSizing(Sizing.fixed(68));
         Component ExitButton = Components.button(Text.literal("Exit"), buttonComponent -> {
-                    client.setScreen(null);})
+                assert client != null;
+                client.setScreen(null);})
                 .id("exit-button")
                 .horizontalSizing(Sizing.fixed(68));
 

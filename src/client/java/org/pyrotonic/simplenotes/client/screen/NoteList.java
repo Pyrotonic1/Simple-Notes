@@ -39,12 +39,13 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
             int finalI = i;
             Component NoteButton = Components.button(Text.literal(NoteDataHandler.readFilenames()[i].replace(".txt", "")), buttonComponent -> {
             Filename = NoteDataHandler.readFilenames()[finalI];
-            client.setScreen(new EditNote());
-            }).margins(Insets.of(5)).sizing(Sizing.content(), Sizing.fixed(20));
+                assert client != null;
+                client.setScreen(new EditNote());
+            }).margins(Insets.of((int) 2.5f)).sizing(Sizing.content(), Sizing.fixed(20));
             ButtonList.child(NoteButton);
         }
 
-        ScrollContainer<FlowLayout> ScrollList = Containers.verticalScroll(Sizing.content(), Sizing.fixed(110), ButtonList);
+        ScrollContainer<FlowLayout> ScrollList = Containers.verticalScroll(Sizing.content(), Sizing.fixed(125), ButtonList);
 
         ContainerLayout.child(ScrollList);
         rootComponent.child(ContainerLayout);

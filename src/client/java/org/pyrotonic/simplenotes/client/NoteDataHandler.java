@@ -6,11 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Scanner;
 
 import org.pyrotonic.simplenotes.Simplenotes;
-import org.pyrotonic.simplenotes.client.screen.MainMenu;
 
 public class NoteDataHandler {
     static String Content;
@@ -22,22 +19,9 @@ public class NoteDataHandler {
         Filename = filename;
     }
 
-    public String getContent() {
-        if (MainMenu.isCreateNote) {
-            Content = "Enter Content here!";
-        }
-        return Content;
-    }
 
     public String getFilename() {
-        if (MainMenu.isCreateNote) {
-            Filename = "Enter Filename here!";
-        }
         return Filename;
-    }
-    public static void emptyFields() {
-        Content = "";
-        Filename = "";
     }
 
     public static void saveContent(String content, String filename) {

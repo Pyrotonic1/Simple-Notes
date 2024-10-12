@@ -6,12 +6,15 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
+import org.pyrotonic.simplenotes.client.screen.CreateNote;
 import org.pyrotonic.simplenotes.client.screen.MainMenu;
 
 import java.io.File;
 
 public class SimplenotesClient implements ClientModInitializer {
     public static KeyBinding OpenMenuKeybind;
+    public static KeyBinding QuickCreateKeybind;
+    public static final String KEY_QUICK_CREATE = "key.simplenotes.quickcreate";
     public static final String KEY_CATEGORY_SIMPLENOTES = "key.category.simplenotes.notes";
     public static final String KEY_OPEN_MENU = "key.simplenotes.mainmenu";
     public static final String MAIN_DIRECTORY_PATH = "simplenotes/";
@@ -30,6 +33,17 @@ public class SimplenotesClient implements ClientModInitializer {
             while (OpenMenuKeybind.wasPressed()) {
                 client.setScreen(new MainMenu());
             }});
+        QuickCreateKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+            KEY_QUICK_CREATE,
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_N,
+            KEY_CATEGORY_SIMPLENOTES
+        ));
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (QuickCreateKeybind.wasPressed()) {
+                client.setScreen(new CreateNote());
+            }
+        });
         File NoteDirectory = new File(NOTE_DIRECTORY_PATH);
         NoteDirectory.mkdirs();
     }

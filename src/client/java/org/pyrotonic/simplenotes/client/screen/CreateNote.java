@@ -12,17 +12,23 @@ import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.Simplenotes;
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
 
-public class EditNote extends BaseOwoScreen<FlowLayout> {
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class CreateNote extends BaseOwoScreen<FlowLayout> {
+
     @Override
     protected @NotNull OwoUIAdapter<FlowLayout> createAdapter() {
         return OwoUIAdapter.create(this, Containers::verticalFlow);
     }
-
     @Override
     protected void build(FlowLayout rootComponent) {
-        NoteDataHandler Note = new NoteDataHandler(NoteDataHandler.readNote(NoteList.Filename), NoteList.Filename);
-        TextAreaComponent TextArea = Components.textArea(Sizing.fixed(200), Sizing.fixed(200),  NoteDataHandler.readNote(Note.getFilename()));
-        TextBoxComponent FilenameBox = Components.textBox(Sizing.fixed(116), Note.getFilename().replace(".txt", ""));
+        final String ContentPlaceholder = "Enter content here!";
+        final String FilenamePlaceholder = "Enter filename here!";
+
+        TextAreaComponent TextArea = Components.textArea(Sizing.fixed(200), Sizing.fixed(200), ContentPlaceholder);
+        TextBoxComponent FilenameBox = Components.textBox(Sizing.fixed(116), FilenamePlaceholder);
         Component SaveButton = Components.button(Text.literal("Save & Exit"), buttonComponent -> {
             NoteDataHandler.saveContent(TextArea.getText(), FilenameBox.getText());
             assert client != null;
@@ -36,6 +42,7 @@ public class EditNote extends BaseOwoScreen<FlowLayout> {
                 .surface(Surface.VANILLA_TRANSLUCENT)
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER);
+
 
         FlowLayout NameNSave = (FlowLayout) Containers.horizontalFlow(Sizing.content(), Sizing.content())
             .child(FilenameBox)
@@ -51,5 +58,32 @@ public class EditNote extends BaseOwoScreen<FlowLayout> {
                 .id("text-box");
 
         rootComponent.child(EditBox);
+
+        TimerTask FocusCheck = new TimerTask() {
+            @Override
+            public void run() {
+                    if (TextArea.isFocused() & Objects.equals(TextArea.getText(), ContentPlaceholder)) {
+                        TextArea.setText("");
+                    }
+                    if (FilenameBox.isFocused() & Objects.equals(FilenameBox.getText(), FilenamePlaceholder)) {
+                        FilenameBox.setText("");
+                    }
+
+            }
+        };
+        TimerTask UnfocusCheck = new TimerTask() {
+            @Override
+            public void run() {
+                    if (!TextArea.isFocused() & Objects.equals(TextArea.getText(), "")) {
+                        TextArea.setText(ContentPlaceholder);
+                    }
+                    if (!FilenameBox.isFocused() & Objects.equals(FilenameBox.getText(), "")) {
+                        FilenameBox.setText(FilenamePlaceholder);
+                    }
+            }
+        };
+        Timer Timer = new Timer();
+        Timer.schedule(FocusCheck, 0, 250);
+        Timer.schedule(UnfocusCheck, 0, 250);
     }
 }
