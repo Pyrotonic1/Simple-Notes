@@ -10,6 +10,7 @@ import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
 
+
 public class NoteList extends BaseOwoScreen<FlowLayout> {
     public static String Filename = "";
 
@@ -17,11 +18,10 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
     protected @NotNull OwoUIAdapter<FlowLayout> createAdapter() {
         return OwoUIAdapter.create(this, Containers::verticalFlow);
     }
-
     @Override
     protected void build(FlowLayout rootComponent) {
         rootComponent
-            .surface(Surface.VANILLA_TRANSLUCENT)
+            .surface(Surface.OPTIONS_BACKGROUND)
             .horizontalAlignment(HorizontalAlignment.CENTER)
             .verticalAlignment(VerticalAlignment.CENTER);
 

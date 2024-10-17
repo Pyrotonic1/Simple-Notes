@@ -39,7 +39,7 @@ public class CreateNote extends BaseOwoScreen<FlowLayout> {
         SaveButton.margins(Insets.of(6));
         FilenameBox.margins(Insets.of(5));
         rootComponent
-                .surface(Surface.VANILLA_TRANSLUCENT)
+                .surface(Surface.OPTIONS_BACKGROUND)
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER);
 

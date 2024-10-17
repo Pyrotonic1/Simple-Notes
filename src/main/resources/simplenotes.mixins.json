@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.pyrotonic.simplenotes.mixin",
+  "package": "org.pyrotonic.simplenotes",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
   ],

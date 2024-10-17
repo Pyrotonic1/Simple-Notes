@@ -22,7 +22,7 @@
   },
 
   "mixins": [
-    "simplenotes.mixins.json"
+    "simplenotes.client.mixins.json"
     ,{
       "config": "simplenotes.client.mixins.json",
       "environment": "client"

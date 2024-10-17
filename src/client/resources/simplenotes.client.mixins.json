@@ -1,9 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.pyrotonic.simplenotes.mixin.client",
+  "package": "org.pyrotonic.simplenotes.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -14,7 +14,6 @@ public class MainMenu extends BaseOwoScreen<FlowLayout> {
     protected @NotNull OwoUIAdapter<FlowLayout> createAdapter() {
         return OwoUIAdapter.create(this, Containers::verticalFlow);
     }
-
     @Override
     protected void build(FlowLayout rootComponent) {
         Component MenuTitle = Components.texture(Identifier.of("simplenotes:textures/gui/menutitle.png"), 0, 0, 330, 60, 330, 60)
@@ -53,7 +52,7 @@ public class MainMenu extends BaseOwoScreen<FlowLayout> {
         rootComponent
                 .child(MenuTitle)
                 .child(MenuButtons)
-                .surface(Surface.VANILLA_TRANSLUCENT)
+                .surface(Surface.OPTIONS_BACKGROUND)
                 .verticalAlignment(VerticalAlignment.CENTER)
                 .horizontalAlignment(HorizontalAlignment.CENTER);
 
