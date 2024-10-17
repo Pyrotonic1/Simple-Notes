@@ -32,6 +32,7 @@ public abstract class TitleScreenMixin extends Screen {
             assert client != null;
             assert client.currentScreen != null;
             LOGGER.info(client.currentScreen.toString());
+            SimplenotesClient.IsIngame = false;
             client.setScreen(new MainMenu());
         }));
     }

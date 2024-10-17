@@ -15,7 +15,7 @@ import org.pyrotonic.simplenotes.client.screen.NoteList;
 import java.io.File;
 
 public class SimplenotesClient implements ClientModInitializer {
-
+    public static boolean IsIngame;
     public static KeyBinding OpenMenuKeybind;
     public static KeyBinding QuickCreateKeybind;
     public static final String KEY_CREATE_NOTE = "key.simplenotes.createnote";
@@ -38,6 +38,7 @@ public class SimplenotesClient implements ClientModInitializer {
         ));
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (OpenMenuKeybind.wasPressed()) {
+                IsIngame = true;
                 client.setScreen(new NoteList());
             }});
         QuickCreateKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -48,6 +49,7 @@ public class SimplenotesClient implements ClientModInitializer {
         ));
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (QuickCreateKeybind.wasPressed()) {
+                IsIngame = true;
                 client.setScreen(new CreateNote());
             }
         });
