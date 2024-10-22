@@ -11,7 +11,7 @@ import org.pyrotonic.simplenotes.client.screen.MainMenu;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(TitleScreen.class)
 public abstract class TitleScreenMixin extends Screen {
@@ -20,8 +20,8 @@ public abstract class TitleScreenMixin extends Screen {
         super(title);
     }
 
-    @Inject(at = @At("RETURN"), method = "initWidgetsNormal")
-    private void addCustomButton(int y, int spacingY, CallbackInfo ci) {
+    @Inject(at = @At("RETURN"), method = "addNormalWidgets")
+    private void addCustomButton(int y, int spacingY, CallbackInfoReturnable<Integer> cir) {
         ButtonTextures ButtonIcon = SimplenotesClient.MAIN_MENU_BUTTON_TEXTURE;
         this.addDrawableChild(new TexturedButtonWidget((this.width / 2 - 122), y + spacingY, 20, 20, ButtonIcon, button -> {
             assert client != null;
