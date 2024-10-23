@@ -27,7 +27,7 @@ public class MainMenu extends BaseOwoScreen<FlowLayout> {
 
         Component CreateNoteButton = Components.button(Text.literal("Create Note"), buttonComponent -> {
                 assert client != null;
-                client.setScreen(new CreateNote());
+                client.setScreen(new NameNote());
             })
                 .id("create-button")
                 .horizontalSizing(Sizing.fixed(68));
