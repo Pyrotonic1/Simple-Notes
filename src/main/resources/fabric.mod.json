@@ -40,11 +40,9 @@
       "links": {
         "modmenu.discord": "https://discord.gg/H7WbRGDwJJ"
       },
-      "parent": {
-        "id": "simplenotes",
-        "name": "Simple Notes",
-        "icon": "assets/simplenotes/icon.png"
-      }
+      "id": "simplenotes",
+      "name": "Simple Notes",
+      "icon": "assets/simplenotes/icon.png"
     }
   }
 }
