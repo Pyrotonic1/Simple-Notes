@@ -10,7 +10,6 @@ import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
-import org.pyrotonic.simplenotes.client.SimplenotesClient;
 
 public class EditNote extends BaseOwoScreen<FlowLayout> {
     @Override
@@ -34,11 +33,7 @@ public class EditNote extends BaseOwoScreen<FlowLayout> {
         Component SaveButton = Components.button(Text.literal("Save & Exit"), buttonComponent -> {
             NoteDataHandler.saveContent(TextArea.getText(), Note.getFilename());
             assert client != null;
-            if (SimplenotesClient.IsIngame) {
-                client.setScreen(null);
-            } else {
-                client.setScreen(new MainMenu());
-            }
+                client.setScreen(new NoteList());
         });
         TextArea.margins(Insets.of(5));
         SaveButton.margins(Insets.of(6));

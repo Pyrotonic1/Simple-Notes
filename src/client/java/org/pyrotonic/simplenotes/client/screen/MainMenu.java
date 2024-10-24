@@ -17,7 +17,7 @@ public class MainMenu extends BaseOwoScreen<FlowLayout> {
     }
     @Override
     protected void build(FlowLayout rootComponent) {
-        Component MenuTitle = Components.texture(Identifier.of("simplenotes:textures/gui/menutitle.png"), 0, 0, 330, 60, 330, 60)
+        Component MenuTitle = Components.texture(Identifier.of("simplenotes:menutitle.png"), 460, 110, 460, 110, 460, 110)
                         .id("menu-title")
                         .positioning(Positioning.relative(50, 25));
 
@@ -49,7 +49,8 @@ public class MainMenu extends BaseOwoScreen<FlowLayout> {
         MenuButtons
             .child(CreateNoteButton)
             .child(OpenNoteButton)
-            .child(ExitButton);
+            .child(ExitButton)
+            .positioning(Positioning.relative(50, 75));
 
         rootComponent
                 .child(MenuTitle)
