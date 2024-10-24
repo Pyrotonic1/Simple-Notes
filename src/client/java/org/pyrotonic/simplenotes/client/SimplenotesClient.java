@@ -9,18 +9,20 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
-import org.pyrotonic.simplenotes.client.screen.CreateNote;
+import org.pyrotonic.simplenotes.Simplenotes;
+import org.pyrotonic.simplenotes.client.screen.NameNote;
 import org.pyrotonic.simplenotes.client.screen.NoteList;
 
 import java.io.File;
 
 public class SimplenotesClient implements ClientModInitializer {
+    public static boolean IsCreated;
     public static boolean IsIngame;
     public static KeyBinding OpenMenuKeybind;
     public static KeyBinding QuickCreateKeybind;
     public static final String KEY_CREATE_NOTE = "key.simplenotes.createnote";
     public static final String KEY_CATEGORY_SIMPLENOTES = "key.category.simplenotes.notes";
-    public static final String KEY_OPEN_MENU = "key.simplenotes.mainmenu";
+    public static final String KEY_OPEN_NOTE_SELECTOR = "key.simplenotes.noteselector";
     public static final String MAIN_DIRECTORY_PATH = "simplenotes/";
     public static final String NOTE_DIRECTORY_PATH = "simplenotes/notes/";
     public static final ButtonTextures MAIN_MENU_BUTTON_TEXTURE = new ButtonTextures(
@@ -31,7 +33,7 @@ public class SimplenotesClient implements ClientModInitializer {
     public void onInitializeClient() {
 
         OpenMenuKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                KEY_OPEN_MENU,
+                KEY_OPEN_NOTE_SELECTOR,
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_O,
                 KEY_CATEGORY_SIMPLENOTES
@@ -50,10 +52,13 @@ public class SimplenotesClient implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (QuickCreateKeybind.wasPressed()) {
                 IsIngame = true;
-                client.setScreen(new CreateNote());
+                IsCreated = true;
+                client.setScreen(new NameNote());
             }
         });
         File NoteDirectory = new File(NOTE_DIRECTORY_PATH);
-        NoteDirectory.mkdirs();
+        if (NoteDirectory.mkdirs()) {
+            Simplenotes.LOGGER.info("Directories created!");
+        }
     }
 }

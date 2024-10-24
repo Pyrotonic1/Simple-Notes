@@ -8,6 +8,8 @@ import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
+import org.pyrotonic.simplenotes.client.NoteDataHandler;
+import org.pyrotonic.simplenotes.client.SimplenotesClient;
 
 import java.util.Objects;
 import java.util.Timer;
@@ -20,6 +22,7 @@ public class NameNote extends BaseOwoScreen<FlowLayout> {
     }
     @Override
     protected void build(FlowLayout rootComponent) {
+        NoteDataHandler Note = new NoteDataHandler(NoteDataHandler.readNote(NoteList.Filename), NoteList.Filename);
         final String NameBoxPlaceholder = "Enter Filename Here!";
         TextBoxComponent TextBox = Components.textBox(Sizing.fixed(116), "Enter Filename Here!");
         Component NameBox = Components.button(Text.literal("Create!"), buttonComponent -> {
@@ -60,7 +63,11 @@ public class NameNote extends BaseOwoScreen<FlowLayout> {
             }
         };
         Timer Timer = new Timer();
-        Timer.schedule(FocusCheck, 0, 250);
-        Timer.schedule(UnfocusCheck, 0, 250);
+        if (SimplenotesClient.IsCreated) {
+            Timer.schedule(FocusCheck, 0, 250);
+            Timer.schedule(UnfocusCheck, 0, 250);
+        } else {
+            TextBox.setText(Note.getFilename());
+        }
     }
 }

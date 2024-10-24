@@ -40,7 +40,7 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
             Component NoteButton = Components.button(Text.literal(NoteDataHandler.readFilenames()[i].replace(".txt", "")), buttonComponent -> {
             Filename = NoteDataHandler.readFilenames()[finalI];
                 assert client != null;
-                client.setScreen(new EditNote());
+                client.setScreen(new SelectAction());
             }).margins(Insets.of((int) 2.5f)).sizing(Sizing.content(), Sizing.fixed(20));
             ButtonList.child(NoteButton);
         }

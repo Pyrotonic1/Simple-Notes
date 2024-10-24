@@ -8,6 +8,7 @@ import io.wispforest.owo.ui.core.*;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
+import org.pyrotonic.simplenotes.client.SimplenotesClient;
 
 public class MainMenu extends BaseOwoScreen<FlowLayout> {
     @Override
@@ -21,7 +22,7 @@ public class MainMenu extends BaseOwoScreen<FlowLayout> {
                         .positioning(Positioning.relative(50, 25));
 
         FlowLayout MenuButtons = (FlowLayout) Containers.horizontalFlow(Sizing.content(), Sizing.content())
-            .gap(10)
+            .gap(20)
             .horizontalAlignment(HorizontalAlignment.CENTER)
             .verticalAlignment(VerticalAlignment.CENTER);
 
@@ -30,18 +31,19 @@ public class MainMenu extends BaseOwoScreen<FlowLayout> {
                 client.setScreen(new NameNote());
             })
                 .id("create-button")
-                .horizontalSizing(Sizing.fixed(68));
-        Component OpenNoteButton = Components.button(Text.literal("Open Note"), buttonComponent -> {
+                .horizontalSizing(Sizing.fixed(78));
+        Component OpenNoteButton = Components.button(Text.literal("Note Selector"), buttonComponent -> {
+                SimplenotesClient.IsCreated = true;
                 assert client != null;
                 client.setScreen(new NoteList());
             })
                 .id("open-button")
-                .horizontalSizing(Sizing.fixed(68));
+                .horizontalSizing(Sizing.fixed(78));
         Component ExitButton = Components.button(Text.literal("Exit"), buttonComponent -> {
                 assert client != null;
                 client.setScreen(null);})
                 .id("exit-button")
-                .horizontalSizing(Sizing.fixed(68));
+                .horizontalSizing(Sizing.fixed(78));
 
 
         MenuButtons

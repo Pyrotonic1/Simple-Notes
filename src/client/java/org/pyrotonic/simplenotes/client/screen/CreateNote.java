@@ -8,7 +8,6 @@ import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
-import org.pyrotonic.simplenotes.Simplenotes;
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
 import org.pyrotonic.simplenotes.client.SimplenotesClient;
 
@@ -46,7 +45,6 @@ public class CreateNote extends BaseOwoScreen<FlowLayout> {
             } else {
                 client.setScreen(new MainMenu());
             }
-            Simplenotes.LOGGER.info("Saved Successfully!");
         });
         TextArea.margins(Insets.of(5));
         SaveButton.margins(Insets.of(6));
