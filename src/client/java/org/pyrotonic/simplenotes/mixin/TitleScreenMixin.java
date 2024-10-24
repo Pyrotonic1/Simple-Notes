@@ -23,7 +23,7 @@ public abstract class TitleScreenMixin extends Screen {
     @Inject(at = @At("RETURN"), method = "addNormalWidgets")
     private void addCustomButton(int y, int spacingY, CallbackInfoReturnable<Integer> cir) {
         ButtonTextures ButtonIcon = SimplenotesClient.MAIN_MENU_BUTTON_TEXTURE;
-        this.addDrawableChild(new TexturedButtonWidget((this.width / 2 - 122), y + spacingY, 20, 20, ButtonIcon, button -> {
+        this.addDrawableChild(new TexturedButtonWidget((this.width / 2 - 122), (y + spacingY) - 48, 20, 20, ButtonIcon, button -> {
             assert client != null;
             assert client.currentScreen != null;
             SimplenotesClient.IsIngame = false;

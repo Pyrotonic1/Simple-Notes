@@ -31,20 +31,18 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.16.5",
-    "fabric": "*",
-    "minecraft": "1.21.1"
+    "fabricloader": ">=0.16.7",
+    "fabric": "0.106.1+1.21.3",
+    "minecraft": "1.21.3"
   },
   "custom": {
     "modmenu": {
       "links": {
         "modmenu.discord": "https://discord.gg/H7WbRGDwJJ"
       },
-      "parent": {
         "id": "simplenotes",
         "name": "Simple Notes",
         "icon": "assets/simplenotes/icon.png"
-      }
     }
   }
 }
