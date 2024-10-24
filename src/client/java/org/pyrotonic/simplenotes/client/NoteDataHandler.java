@@ -35,7 +35,7 @@ public class NoteDataHandler {
             note.write(content);
             note.close();
         } catch (FileNotFoundException err) {
-            Simplenotes.LOGGER.error("Simplenotes directory not found, please restart your game!");
+            Simplenotes.LOGGER.error("The note was not found. Try restarting.");
         } catch (IOException err) {
             Simplenotes.LOGGER.error("An IOException error occurred while saving the file.", err.fillInStackTrace());
 
@@ -51,6 +51,16 @@ public class NoteDataHandler {
         } catch (IOException err) {
             Simplenotes.LOGGER.error("An IOException occurred while renaming the file.", err.fillInStackTrace());
         }
+        }
+
+        public void deleteFile(String note) {
+            File Note = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + note);
+
+            try {
+                FileUtils.delete(Note);
+            } catch (IOException err) {
+                Simplenotes.LOGGER.error("An IOException occurred while deleting the file.", err.fillInStackTrace());
+            }
         }
 
     public static String readNote(String filename) {

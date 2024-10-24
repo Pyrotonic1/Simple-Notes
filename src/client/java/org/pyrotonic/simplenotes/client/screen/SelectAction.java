@@ -9,7 +9,6 @@ import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
-
 import org.pyrotonic.simplenotes.client.SimplenotesClient;
 
 public class SelectAction extends BaseOwoScreen<FlowLayout> {
@@ -34,10 +33,20 @@ public class SelectAction extends BaseOwoScreen<FlowLayout> {
             assert client != null;
             client.setScreen(new NoteList());
         });
+        ButtonComponent Delete = Components.button(Text.literal("Delete Note"), buttonComponent -> {
+            assert client != null;
+            client.setScreen(new DeleteNote());
+        });
+
+        RenameNote.horizontalSizing(Sizing.fixed(70));
+        OpenNote.horizontalSizing(Sizing.fixed(70));
+        Back.horizontalSizing(Sizing.fixed(70));
+        Delete.horizontalSizing(Sizing.fixed(70));
         Label.margins(Insets.of(5));
         Back.margins(Insets.of(5));
         OpenNote.margins(Insets.of(5));
         RenameNote.margins(Insets.of(5));
+        Delete.margins(Insets.of(5));
 
         FlowLayout Container = (FlowLayout) Containers.verticalFlow(Sizing.content(), Sizing.content())
                 .padding(Insets.of(15))
@@ -47,6 +56,7 @@ public class SelectAction extends BaseOwoScreen<FlowLayout> {
         Container.child(Label);
         Container.child(OpenNote);
         Container.child(RenameNote);
+        Container.child(Delete);
         Container.child(Back);
 
         rootComponent
