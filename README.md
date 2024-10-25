@@ -1,7 +1,5 @@
 # Simple Notes
 
-## Features
-
 Simple notes is a mod that allows you to create, save, and edit text files all entirely in the game. There are no special features yet, but this mod is still in development, so expect new features in the future!
 
 ## Downloading the mod
