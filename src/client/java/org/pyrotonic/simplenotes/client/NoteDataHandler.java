@@ -8,6 +8,7 @@ import java.nio.file.Files;
 
 import java.nio.file.Paths;
 
+import org.apache.commons.io.FileExistsException;
 import org.apache.commons.io.FileUtils;
 import org.pyrotonic.simplenotes.Simplenotes;
 
@@ -40,28 +41,32 @@ public class NoteDataHandler {
             Simplenotes.LOGGER.error("An IOException error occurred while saving the file.", err.fillInStackTrace());
 
         }
-        }
-        public void saveFilename(String oldFilename, String newFilename) throws IOException {
-        File OldFile = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + oldFilename);
-        File NewFile = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + newFilename);
+    }
+    
+    public void saveFilename(String oldFilename, String newFilename) throws IOException {
+    File OldFile = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + oldFilename);
+    File NewFile = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + newFilename);
+
+    try {
+        FileUtils.moveFile(OldFile, new File(NewFile + ".txt"));
+        Simplenotes.LOGGER.info("File renamed!");
+    } catch (FileExistsException err) {
+        Simplenotes.LOGGER.error("The file you tried to renaming either already has that name or there is another note with that name.", err.fillInStackTrace());
+    } catch (IOException err) {
+        Simplenotes.LOGGER.error("An IOException occurred while renaming the file.", err.fillInStackTrace());
+    } 
+    } 
+
+    public void deleteFile(String note) {
+        File Note = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + note);
 
         try {
-            FileUtils.moveFile(OldFile, new File(NewFile + ".txt"));
-            Simplenotes.LOGGER.info("File renamed!");
+            FileUtils.delete(Note);
         } catch (IOException err) {
-            Simplenotes.LOGGER.error("An IOException occurred while renaming the file.", err.fillInStackTrace());
+            Simplenotes.LOGGER.error("An IOException occurred while deleting the file.", err.fillInStackTrace());
         }
-        }
-
-        public void deleteFile(String note) {
-            File Note = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + note);
-
-            try {
-                FileUtils.delete(Note);
-            } catch (IOException err) {
-                Simplenotes.LOGGER.error("An IOException occurred while deleting the file.", err.fillInStackTrace());
-            }
-        }
+        
+    }
 
     public static String readNote(String filename) {
         String data = "";

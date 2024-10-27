@@ -15,6 +15,7 @@ import io.wispforest.owo.ui.core.OwoUIAdapter;
 import io.wispforest.owo.ui.core.Sizing;
 import io.wispforest.owo.ui.core.Surface;
 import io.wispforest.owo.ui.core.VerticalAlignment;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 
 public class DeleteNote extends BaseOwoScreen<FlowLayout> {
@@ -32,6 +33,9 @@ public class DeleteNote extends BaseOwoScreen<FlowLayout> {
             Note.deleteFile(NoteList.Filename);
             assert client != null;
             client.setScreen(new NoteList());
+            client.getToastManager().add(
+                SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes"), Text.literal("Note \"" + NoteList.Filename.replace(".txt", "") + "\" Deleted"))
+            );
         });
         ButtonComponent No = Components.button(Text.literal("No"), buttonComponent -> {
             assert client != null;

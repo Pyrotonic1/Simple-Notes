@@ -6,6 +6,7 @@ import io.wispforest.owo.ui.component.TextBoxComponent;
 import io.wispforest.owo.ui.container.Containers;
 import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.*;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.Simplenotes;
@@ -31,6 +32,9 @@ public class RenameNote extends BaseOwoScreen<FlowLayout> {
             }
             assert client != null;
             client.setScreen(new NoteList());
+            client.getToastManager().add(
+                SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes"), Text.literal("Note \"" + NoteList.Filename.replace(".txt", "") + "\" renamed to \"" + TextBox.getText() + "\""))
+            );
             });
 
         TextBox.margins(Insets.of(5));

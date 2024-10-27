@@ -20,6 +20,7 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
     }
     @Override
     protected void build(FlowLayout rootComponent) {
+        String Filenames[] = NoteDataHandler.readFilenames();
         rootComponent
             .surface(Surface.OPTIONS_BACKGROUND)
             .horizontalAlignment(HorizontalAlignment.CENTER)
@@ -31,14 +32,17 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
             .verticalAlignment(VerticalAlignment.CENTER)
             .horizontalAlignment(HorizontalAlignment.CENTER);
 
-        ContainerLayout.child(Components.label(Text.literal("Select a note:")));
+        Component BackButton = Components.button(Text.literal("Back"), buttonComponent -> {
+            assert client != null;
+            client.setScreen(new MainMenu());
+        }).horizontalSizing(Sizing.fixed(50)).margins(Insets.of(5));
 
         FlowLayout ButtonList = (FlowLayout) Containers.verticalFlow(Sizing.content(), Sizing.content()).horizontalAlignment(HorizontalAlignment.CENTER).margins(Insets.of(5));
 
-        for (int i = 0; i < NoteDataHandler.readFilenames().length; i++) {
+        for (int i = 0; i < Filenames.length; i++) {
             int finalI = i;
-            Component NoteButton = Components.button(Text.literal(NoteDataHandler.readFilenames()[i].replace(".txt", "")), buttonComponent -> {
-            Filename = NoteDataHandler.readFilenames()[finalI];
+            Component NoteButton = Components.button(Text.literal(Filenames[i].replace(".txt", "")), buttonComponent -> {
+                Filename = Filenames[finalI];
                 assert client != null;
                 client.setScreen(new SelectAction());
             }).margins(Insets.of((int) 2.5f)).sizing(Sizing.content(), Sizing.fixed(20));
@@ -46,8 +50,15 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
         }
 
         ScrollContainer<FlowLayout> ScrollList = Containers.verticalScroll(Sizing.content(), Sizing.fixed(125), ButtonList);
-
-        ContainerLayout.child(ScrollList);
-        rootComponent.child(ContainerLayout);
+        if (Filenames.length == 0) {
+            ContainerLayout.child(Components.label(Text.literal("You have no notes. :(")));
+            ContainerLayout.child(BackButton);
+            rootComponent.child(ContainerLayout);
+        } else {
+            ContainerLayout.child(Components.label(Text.literal("Select a note:")));
+            ContainerLayout.child(ScrollList);
+            ContainerLayout.child(BackButton);
+            rootComponent.child(ContainerLayout);
+        }    
     }
 }
