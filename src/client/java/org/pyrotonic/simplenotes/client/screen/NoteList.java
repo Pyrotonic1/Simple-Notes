@@ -59,6 +59,6 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
             ContainerLayout.child(ScrollList);
             ContainerLayout.child(BackButton);
             rootComponent.child(ContainerLayout);
-        }    
+        }
     }
 }

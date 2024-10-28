@@ -6,6 +6,7 @@ import io.wispforest.owo.ui.component.TextAreaComponent;
 import io.wispforest.owo.ui.container.Containers;
 import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.*;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,6 +33,15 @@ public class EditNote extends BaseOwoScreen<FlowLayout> {
         Component FilenameLabel = Components.label(Text.literal(decideLabelContent(Note.getFilename().replace(".txt", "")))).horizontalSizing(Sizing.fixed(130));
         Component SaveButton = Components.button(Text.literal("Save & Exit"), buttonComponent -> {
             NoteDataHandler.saveContent(TextArea.getText(), Note.getFilename());
+            if (NoteDataHandler.saveContent(TextArea.getText(), Note.getFilename())) {
+                client.getToastManager().add(
+                    SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Success"), Text.literal("Note \"" + Note.getFilename().replace(".txt", "") + "\" Saved"))
+                );
+            } else if (!NoteDataHandler.saveContent(TextArea.getText(), Note.getFilename())) {
+                client.getToastManager().add(
+                    SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Error"), Text.literal("Note \"" + Note.getFilename().replace(".txt", "") + "\" Not saved, check logs"))
+                );
+            }
             assert client != null;
                 client.setScreen(new NoteList());
         });

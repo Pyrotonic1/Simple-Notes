@@ -32,10 +32,17 @@ public class DeleteNote extends BaseOwoScreen<FlowLayout> {
         ButtonComponent Yes = Components.button(Text.literal("Yes"), buttonComponent -> {
             Note.deleteFile(NoteList.Filename);
             assert client != null;
+            
+            if (Note.deleteFile(NoteList.Filename)) {
+                client.getToastManager().add(
+                    SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Success"), Text.literal("Note \"" + NoteList.Filename.replace(".txt", "") + "\" Deleted"))
+                );
+            } else if (!Note.deleteFile(NoteList.Filename)) {
+                client.getToastManager().add(
+                    SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Error"), Text.literal("Note \"" + NoteList.Filename.replace(".txt", "") + "\" Could not be deleted, check logs"))
+                );
+            }
             client.setScreen(new NoteList());
-            client.getToastManager().add(
-                SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes"), Text.literal("Note \"" + NoteList.Filename.replace(".txt", "") + "\" Deleted"))
-            );
         });
         ButtonComponent No = Components.button(Text.literal("No"), buttonComponent -> {
             assert client != null;

@@ -6,6 +6,7 @@ import io.wispforest.owo.ui.component.TextAreaComponent;
 import io.wispforest.owo.ui.container.Containers;
 import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.*;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
@@ -39,6 +40,15 @@ public class CreateNote extends BaseOwoScreen<FlowLayout> {
         Component FilenameLabel = Components.label(Text.literal(decideLabelContent(Filename))).horizontalSizing(Sizing.fixed(130));
         Component SaveButton = Components.button(Text.literal("Save & Exit"), buttonComponent -> {
             NoteDataHandler.saveContent(TextArea.getText(), Filename);
+            if (NoteDataHandler.saveContent(TextArea.getText(), Filename)) {
+                client.getToastManager().add(
+                    SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Success"), Text.literal("Note \"" + Filename.replace(".txt", "") + "\" Saved"))
+                );
+            } else if (!NoteDataHandler.saveContent(TextArea.getText(), Filename)) {
+                client.getToastManager().add(
+                    SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Error"), Text.literal("Note \"" + Filename.replace(".txt", "") + "\" Not saved, check logs"))
+                );
+            }
             assert client != null;
             if (SimplenotesClient.IsIngame) {
                 client.setScreen(null);

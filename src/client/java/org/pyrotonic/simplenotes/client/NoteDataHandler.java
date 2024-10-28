@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 
 import java.nio.file.Paths;
 
-import org.apache.commons.io.FileExistsException;
 import org.apache.commons.io.FileUtils;
 import org.pyrotonic.simplenotes.Simplenotes;
 
@@ -27,7 +27,7 @@ public class NoteDataHandler {
         return Filename;
     }
 
-    public static void saveContent(String content, String filename) {
+    public static Boolean saveContent(String content, String filename) {
         try {
             if (filename.contains(".txt")) {
                 filename = filename.replace(".txt", "");
@@ -37,35 +37,40 @@ public class NoteDataHandler {
             note.close();
         } catch (FileNotFoundException err) {
             Simplenotes.LOGGER.error("The note was not found. Try restarting.");
+            return false;
         } catch (IOException err) {
             Simplenotes.LOGGER.error("An IOException error occurred while saving the file.", err.fillInStackTrace());
-
+            return false;
         }
+        return true;
     }
     
-    public void saveFilename(String oldFilename, String newFilename) throws IOException {
+    public Boolean saveFilename(String oldFilename, String newFilename) throws IOException {
     File OldFile = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + oldFilename);
     File NewFile = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + newFilename);
 
     try {
         FileUtils.moveFile(OldFile, new File(NewFile + ".txt"));
         Simplenotes.LOGGER.info("File renamed!");
-    } catch (FileExistsException err) {
-        Simplenotes.LOGGER.error("The file you tried to renaming either already has that name or there is another note with that name.", err.fillInStackTrace());
-    } catch (IOException err) {
-        Simplenotes.LOGGER.error("An IOException occurred while renaming the file.", err.fillInStackTrace());
-    } 
+        } catch (FileNotFoundException err) {
+            Simplenotes.LOGGER.error("The file you tried to rename could not be found.", err.fillInStackTrace());
+            return false;
+        } catch (FileAlreadyExistsException err) {
+            Simplenotes.LOGGER.error("There is a file that already has that name.", err.fillInStackTrace());
+        }
+        return true;
     } 
 
-    public void deleteFile(String note) {
+    public Boolean deleteFile(String note) {
         File Note = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + note);
 
         try {
             FileUtils.delete(Note);
         } catch (IOException err) {
             Simplenotes.LOGGER.error("An IOException occurred while deleting the file.", err.fillInStackTrace());
+            return false;
         }
-        
+        return true;
     }
 
     public static String readNote(String filename) {

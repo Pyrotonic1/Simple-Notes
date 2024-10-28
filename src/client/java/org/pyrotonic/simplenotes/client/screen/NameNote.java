@@ -6,10 +6,9 @@ import io.wispforest.owo.ui.component.TextBoxComponent;
 import io.wispforest.owo.ui.container.Containers;
 import io.wispforest.owo.ui.container.FlowLayout;
 import io.wispforest.owo.ui.core.*;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
-import org.pyrotonic.simplenotes.client.NoteDataHandler;
-import org.pyrotonic.simplenotes.client.SimplenotesClient;
 
 import java.util.Objects;
 import java.util.Timer;
@@ -22,13 +21,21 @@ public class NameNote extends BaseOwoScreen<FlowLayout> {
     }
     @Override
     protected void build(FlowLayout rootComponent) {
-        NoteDataHandler Note = new NoteDataHandler(NoteDataHandler.readNote(NoteList.Filename), NoteList.Filename);
         final String NameBoxPlaceholder = "Enter Filename Here!";
         TextBoxComponent TextBox = Components.textBox(Sizing.fixed(116), "Enter Filename Here!");
         Component NameBox = Components.button(Text.literal("Create!"), buttonComponent -> {
-            CreateNote.Filename = TextBox.getText();
-            assert client != null;
-            client.setScreen(new CreateNote());
+            if (TextBox.getText() == NameBoxPlaceholder) {
+                client.getToastManager().add(
+                    SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Error"), Text.literal("Give your note a name!"))
+                );
+            } else {
+                CreateNote.Filename = TextBox.getText();
+                client.getToastManager().add(
+                    SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Success"), Text.literal("Note Created!"))
+                );
+                assert client != null;
+                client.setScreen(new CreateNote());
+            }
             });
 
         TextBox.margins(Insets.of(5));
@@ -63,11 +70,7 @@ public class NameNote extends BaseOwoScreen<FlowLayout> {
             }
         };
         Timer Timer = new Timer();
-        if (SimplenotesClient.IsCreated) {
             Timer.schedule(FocusCheck, 0, 250);
             Timer.schedule(UnfocusCheck, 0, 250);
-        } else {
-            TextBox.setText(Note.getFilename());
-        }
     }
 }
