@@ -34,10 +34,12 @@ public class EditNote extends BaseOwoScreen<FlowLayout> {
         Component SaveButton = Components.button(Text.literal("Save & Exit"), buttonComponent -> {
             NoteDataHandler.saveContent(TextArea.getText(), Note.getFilename());
             if (NoteDataHandler.saveContent(TextArea.getText(), Note.getFilename())) {
+                assert client != null;
                 client.getToastManager().add(
                     SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Success"), Text.literal("Note \"" + Note.getFilename().replace(".txt", "") + "\" Saved"))
                 );
             } else if (!NoteDataHandler.saveContent(TextArea.getText(), Note.getFilename())) {
+                assert client != null;
                 client.getToastManager().add(
                     SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Error"), Text.literal("Note \"" + Note.getFilename().replace(".txt", "") + "\" Not saved, check logs"))
                 );

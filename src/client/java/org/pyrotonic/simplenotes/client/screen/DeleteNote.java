@@ -30,14 +30,13 @@ public class DeleteNote extends BaseOwoScreen<FlowLayout> {
         NoteDataHandler Note = new NoteDataHandler(NoteDataHandler.readNote(NoteList.Filename), NoteList.Filename);
         LabelComponent Label = Components.label(Text.literal("Are you sure?"));
         ButtonComponent Yes = Components.button(Text.literal("Yes"), buttonComponent -> {
-            Note.deleteFile(NoteList.Filename);
             assert client != null;
             
             if (Note.deleteFile(NoteList.Filename)) {
                 client.getToastManager().add(
                     SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Success"), Text.literal("Note \"" + NoteList.Filename.replace(".txt", "") + "\" Deleted"))
                 );
-            } else if (!Note.deleteFile(NoteList.Filename)) {
+            } else {
                 client.getToastManager().add(
                     SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Error"), Text.literal("Note \"" + NoteList.Filename.replace(".txt", "") + "\" Could not be deleted, check logs"))
                 );
