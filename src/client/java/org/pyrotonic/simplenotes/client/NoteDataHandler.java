@@ -51,7 +51,6 @@ public class NoteDataHandler {
 
     try {
         FileUtils.moveFile(OldFile, new File(NewFile + ".txt"));
-        Simplenotes.LOGGER.info("File renamed!");
         } catch (FileNotFoundException err) {
             Simplenotes.LOGGER.error("The file you tried to rename could not be found.", err.fillInStackTrace());
             return false;

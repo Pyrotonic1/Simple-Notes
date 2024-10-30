@@ -9,7 +9,6 @@ import io.wispforest.owo.ui.core.*;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
-import org.pyrotonic.simplenotes.Simplenotes;
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
 
 import java.util.Objects;
@@ -27,31 +26,32 @@ public class NameNote extends BaseOwoScreen<FlowLayout> {
     @Override
     protected void build(FlowLayout rootComponent) {
         final String NameBoxPlaceholder = "Enter Filename Here!";
-        String Filenames[] = NoteDataHandler.readFilenames();
+        String[] Filenames = NoteDataHandler.readFilenames();
         TextBoxComponent TextBox = Components.textBox(Sizing.fixed(116), "Enter Filename Here!");
         Component NameBox = Components.button(Text.literal("Create!"), buttonComponent -> {
-            if (TextBox.getText() == NameBoxPlaceholder) {
+            if (Objects.equals(TextBox.getText(), NameBoxPlaceholder)) {
+                assert client != null;
                 client.getToastManager().add(
                     SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Error"), Text.literal("Give your note a name!"))
                 );
             } else {
-                for (int i = 0; i < Filenames.length; i++) {
-                    if (Filenames[i].replace(".txt", "").equals(TextBox.getText())) {
-                        Simplenotes.LOGGER.error("Note Exists already!");
+                for (String filename : Filenames) {
+                    if (filename.replace(".txt", "").equals(TextBox.getText())) {
                         DoesFilenameExist = true;
                         break;
                     }
                     DoesFilenameExist = false;
                 }
-                if (DoesFilenameExist == false) {
-                    Simplenotes.LOGGER.info("Note doesn't exist");
+                if (!DoesFilenameExist) {
                     CreateNote.Filename = TextBox.getText();
+                    assert client != null;
                     client.getToastManager().add(
                     SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Success"), Text.literal("Note Created!"))
                     );
                     assert client != null;
                     client.setScreen(new CreateNote());
-                } else if (DoesFilenameExist == true) {
+                } else {
+                    assert client != null;
                     client.getToastManager().add(
                         SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Error"), Text.literal("Note not created; a note already has that name."))
                     );
