@@ -20,27 +20,27 @@ public class RenameNote extends BaseOwoScreen<FlowLayout> {
         return OwoUIAdapter.create(this, Containers::verticalFlow);
     }
 
-    static boolean success = true;
 
     @Override
     protected void build(FlowLayout rootComponent) {
         NoteDataHandler Note = new NoteDataHandler(NoteDataHandler.readNote(NoteList.Filename), NoteList.Filename);
         TextBoxComponent TextBox = Components.textBox(Sizing.fixed(116), NoteList.Filename.replace(".txt", ""));
         Component NameBox = Components.button(Text.literal("Rename!"), buttonComponent -> {
-            assert client != null;
-            client.setScreen(new NoteList());
             try {
-                if (Note.saveFilename(NoteList.Filename, TextBox.getText()) == true) {
-                client.getToastManager().clear();
+                if (Note.saveFilename(NoteList.Filename, TextBox.getText())) {
+                    assert client != null;
+                    client.getToastManager().clear();
                 client.getToastManager().add(
                     SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Success"), Text.literal("Note \"" + NoteList.Filename.replace(".txt", "") + "\" renamed to \"" + TextBox.getText() + "\""))); 
-                } else if (Note.saveFilename(NoteList.Filename, TextBox.getText()) == false) {
+                } else if (!Note.saveFilename(NoteList.Filename, TextBox.getText())) {
+                    assert client != null;
                     client.getToastManager().clear();
                 client.getToastManager().add(
                     SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Error"), Text.literal("Note \"" + NoteList.Filename.replace(".txt", "") + "\" Couldn't be renamed to \"" + TextBox.getText() + "\", check logs")));
                 }
-            } catch (IOException err) {
-            }
+            } catch (IOException ignored) {}
+            assert client != null;
+            client.setScreen(new NoteList());
             });
 
         TextBox.margins(Insets.of(5));

@@ -10,7 +10,6 @@ import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
 
-
 public class NoteList extends BaseOwoScreen<FlowLayout> {
     public static String Filename = "";
 
@@ -20,7 +19,7 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
     }
     @Override
     protected void build(FlowLayout rootComponent) {
-        String Filenames[] = NoteDataHandler.readFilenames();
+        String[] Filenames = NoteDataHandler.readFilenames();
         rootComponent
             .surface(Surface.OPTIONS_BACKGROUND)
             .horizontalAlignment(HorizontalAlignment.CENTER)
@@ -52,13 +51,11 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
         ScrollContainer<FlowLayout> ScrollList = Containers.verticalScroll(Sizing.content(), Sizing.fixed(125), ButtonList);
         if (Filenames.length == 0) {
             ContainerLayout.child(Components.label(Text.literal("You have no notes. :(")));
-            ContainerLayout.child(BackButton);
-            rootComponent.child(ContainerLayout);
         } else {
             ContainerLayout.child(Components.label(Text.literal("Select a note:")));
             ContainerLayout.child(ScrollList);
-            ContainerLayout.child(BackButton);
-            rootComponent.child(ContainerLayout);
         }
+        ContainerLayout.child(BackButton);
+        rootComponent.child(ContainerLayout);
     }
 }
