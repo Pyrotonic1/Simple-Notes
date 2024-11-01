@@ -29,7 +29,7 @@ public class NameNote extends BaseOwoScreen<FlowLayout> {
         String[] Filenames = NoteDataHandler.readFilenames();
         TextBoxComponent TextBox = Components.textBox(Sizing.fixed(116), "Enter Filename Here!");
         Component NameBox = Components.button(Text.literal("Create!"), buttonComponent -> {
-            if (Objects.equals(TextBox.getText(), NameBoxPlaceholder)) {
+            if (Objects.equals(TextBox.getText(), NameBoxPlaceholder) || Objects.equals(TextBox.getText(), "")) {
                 assert client != null;
                 client.getToastManager().add(
                     SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.literal("Simple Notes - Error"), Text.literal("Give your note a name!"))
