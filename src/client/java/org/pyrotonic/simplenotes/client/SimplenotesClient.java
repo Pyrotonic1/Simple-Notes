@@ -4,6 +4,7 @@ package org.pyrotonic.simplenotes.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ButtonTextures;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
@@ -16,6 +17,7 @@ import org.pyrotonic.simplenotes.client.screen.NoteList;
 import java.io.File;
 
 public class SimplenotesClient implements ClientModInitializer {
+    public static final MinecraftClient client = MinecraftClient.getInstance();
     public static boolean IsCreated;
     public static boolean IsIngame;
     public static KeyBinding OpenMenuKeybind;

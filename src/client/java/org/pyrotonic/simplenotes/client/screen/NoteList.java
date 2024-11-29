@@ -9,6 +9,7 @@ import io.wispforest.owo.ui.core.*;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
+import org.pyrotonic.simplenotes.client.utils.IngameChecks;
 
 public class NoteList extends BaseOwoScreen<FlowLayout> {
     public static String Filename = "";
@@ -21,7 +22,7 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
     protected void build(FlowLayout rootComponent) {
         String[] Filenames = NoteDataHandler.readFilenames();
         rootComponent
-            .surface(Surface.OPTIONS_BACKGROUND)
+            .surface(IngameChecks.getSurface())
             .horizontalAlignment(HorizontalAlignment.CENTER)
             .verticalAlignment(VerticalAlignment.CENTER);
 
@@ -31,10 +32,7 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
             .verticalAlignment(VerticalAlignment.CENTER)
             .horizontalAlignment(HorizontalAlignment.CENTER);
 
-        Component BackButton = Components.button(Text.literal("Back"), buttonComponent -> {
-            assert client != null;
-            client.setScreen(new MainMenu());
-        }).horizontalSizing(Sizing.fixed(50)).margins(Insets.of(5));
+        Component BackButton = IngameChecks.getNoteListBackButton();
 
         FlowLayout ButtonList = (FlowLayout) Containers.verticalFlow(Sizing.content(), Sizing.content()).horizontalAlignment(HorizontalAlignment.CENTER).margins(Insets.of(5));
 

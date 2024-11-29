@@ -11,6 +11,7 @@ import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
+import org.pyrotonic.simplenotes.client.utils.IngameChecks;
 
 public class EditNote extends BaseOwoScreen<FlowLayout> {
     @Override
@@ -51,7 +52,7 @@ public class EditNote extends BaseOwoScreen<FlowLayout> {
         SaveButton.margins(Insets.of(6));
         FilenameLabel.margins(Insets.of(11));
         rootComponent
-                .surface(Surface.OPTIONS_BACKGROUND)
+                .surface(IngameChecks.getSurface())
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER);
 

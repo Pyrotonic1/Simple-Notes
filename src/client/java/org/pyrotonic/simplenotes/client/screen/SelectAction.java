@@ -10,6 +10,7 @@ import io.wispforest.owo.ui.core.*;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.client.SimplenotesClient;
+import org.pyrotonic.simplenotes.client.utils.IngameChecks;
 
 public class SelectAction extends BaseOwoScreen<FlowLayout> {
     @Override
@@ -62,7 +63,7 @@ public class SelectAction extends BaseOwoScreen<FlowLayout> {
         rootComponent
             .horizontalAlignment(HorizontalAlignment.CENTER)
             .verticalAlignment(VerticalAlignment.CENTER)
-            .surface(Surface.OPTIONS_BACKGROUND);
+            .surface(IngameChecks.getSurface());
 
         rootComponent.child(Container);
     }

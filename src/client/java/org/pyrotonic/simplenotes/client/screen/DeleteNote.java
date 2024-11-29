@@ -17,6 +17,7 @@ import io.wispforest.owo.ui.core.Surface;
 import io.wispforest.owo.ui.core.VerticalAlignment;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
+import org.pyrotonic.simplenotes.client.utils.IngameChecks;
 
 public class DeleteNote extends BaseOwoScreen<FlowLayout> {
 
@@ -69,7 +70,7 @@ public class DeleteNote extends BaseOwoScreen<FlowLayout> {
                 .child(Container)
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER)
-                .surface(Surface.OPTIONS_BACKGROUND);
+                .surface(IngameChecks.getSurface());
     }
     
 }

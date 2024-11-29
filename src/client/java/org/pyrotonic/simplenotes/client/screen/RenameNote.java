@@ -10,6 +10,7 @@ import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
+import org.pyrotonic.simplenotes.client.utils.IngameChecks;
 
 import java.io.IOException;
 
@@ -53,7 +54,7 @@ public class RenameNote extends BaseOwoScreen<FlowLayout> {
 
         rootComponent
             .child(NameDialog)
-            .surface(Surface.OPTIONS_BACKGROUND)
+            .surface(IngameChecks.getSurface())
             .horizontalAlignment(HorizontalAlignment.CENTER)
             .verticalAlignment(VerticalAlignment.CENTER);
     }

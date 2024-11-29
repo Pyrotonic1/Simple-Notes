@@ -11,6 +11,7 @@ import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
 import org.pyrotonic.simplenotes.client.SimplenotesClient;
+import org.pyrotonic.simplenotes.client.utils.IngameChecks;
 
 import java.util.Objects;
 import java.util.Timer;
@@ -62,7 +63,7 @@ public class CreateNote extends BaseOwoScreen<FlowLayout> {
         SaveButton.margins(Insets.of(6));
         FilenameLabel.margins(Insets.of(11));
         rootComponent
-                .surface(Surface.OPTIONS_BACKGROUND)
+                .surface(IngameChecks.getSurface())
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER);
 
