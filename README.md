@@ -1,16 +1,19 @@
-# Simple Notes
+# Note (heh, get it?): I am currently re-writing the mod to support more features and be easier to use. This will take a while, so in the meantime I will only be updating this mod to support newer versions.
+P.S: I may or may not archive this repository and put the rewrite under a new name and project on Modrinth and Curseforge. I have not decided on that yet, though.
+
+## Simple Notes
 
 Simple notes is a mod that allows you to create, save, and edit text files all entirely in the game. There are no special features yet, but this mod is still in development, so expect new features in the future!
 
-## Downloading the mod
+### Downloading the mod
 
 This mod requires [the owolib mod](https://modrinth.com/mod/owo-lib) to play. If you forget to install it, a dialog will appear asking if the game can download it for you.
 
-## Screenshots
+### Screenshots
 ![The main menu of Simple Notes.](https://cdn.modrinth.com/data/cached_images/a1eb15f12282750c0f6bba4b18ee3bd9bd4d7789_0.webp)
 ![The note editor.](https://cdn.modrinth.com/data/cached_images/db98782ed3729e5f5ac449e71821768863c72ee8_0.webp)
 ![The note selector.](https://cdn.modrinth.com/data/cached_images/fcd443f95859374c89fcb2d75a2fa341a40c092a_0.webp)
 
-## Other info
+### Other info
 
 You can join my [discord server](https://discord.gg/H7WbRGDwJJ) for support, feedback, or just to hang out!
