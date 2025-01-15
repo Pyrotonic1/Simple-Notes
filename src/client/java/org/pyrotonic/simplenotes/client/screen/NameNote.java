@@ -10,6 +10,7 @@ import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
+import org.pyrotonic.simplenotes.client.SimplenotesClient;
 import org.pyrotonic.simplenotes.client.utils.IngameChecks;
 
 import java.util.Objects;
@@ -26,6 +27,10 @@ public class NameNote extends BaseOwoScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
+        final Surface surface;
+        if (!SimplenotesClient.IsIngame) {
+            surface = (owoUIDrawContext, parentComponent) -> ROTATING_PANORAMA_RENDERER.render(owoUIDrawContext, this.width, this.height, 255, this.getPanoramaTickDelta());
+        } else {surface = IngameChecks.getSurface();}
         final String NameBoxPlaceholder = "Enter Filename Here!";
         String[] Filenames = NoteDataHandler.readFilenames();
         TextBoxComponent TextBox = Components.textBox(Sizing.fixed(116), "Enter Filename Here!");
@@ -70,7 +75,7 @@ public class NameNote extends BaseOwoScreen<FlowLayout> {
 
         rootComponent
             .child(NameDialog)
-            .surface(IngameChecks.getSurface())
+            .surface(surface)
             .horizontalAlignment(HorizontalAlignment.CENTER)
             .verticalAlignment(VerticalAlignment.CENTER);
 

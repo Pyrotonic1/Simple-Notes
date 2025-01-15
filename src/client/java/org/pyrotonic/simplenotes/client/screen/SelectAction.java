@@ -20,6 +20,10 @@ public class SelectAction extends BaseOwoScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
+        final Surface surface;
+        if (!SimplenotesClient.IsIngame) {
+            surface = (owoUIDrawContext, parentComponent) -> ROTATING_PANORAMA_RENDERER.render(owoUIDrawContext, this.width, this.height, 255, this.getPanoramaTickDelta());
+        } else {surface = IngameChecks.getSurface();}
         LabelComponent Label = Components.label(Text.literal("Select an action:"));
         ButtonComponent RenameNote = Components.button(Text.literal("Rename Note"), buttonComponent -> {
             SimplenotesClient.IsCreated = false;
@@ -63,7 +67,7 @@ public class SelectAction extends BaseOwoScreen<FlowLayout> {
         rootComponent
             .horizontalAlignment(HorizontalAlignment.CENTER)
             .verticalAlignment(VerticalAlignment.CENTER)
-            .surface(IngameChecks.getSurface());
+            .surface(surface);
 
         rootComponent.child(Container);
     }

@@ -11,6 +11,7 @@ import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
+import org.pyrotonic.simplenotes.client.SimplenotesClient;
 import org.pyrotonic.simplenotes.client.utils.IngameChecks;
 
 public class EditNote extends BaseOwoScreen<FlowLayout> {
@@ -29,6 +30,10 @@ public class EditNote extends BaseOwoScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
+        final Surface surface;
+        if (!SimplenotesClient.IsIngame) {
+            surface = (owoUIDrawContext, parentComponent) -> ROTATING_PANORAMA_RENDERER.render(owoUIDrawContext, this.width, this.height, 255, this.getPanoramaTickDelta());
+        } else {surface = IngameChecks.getSurface();}
         NoteDataHandler Note = new NoteDataHandler(NoteDataHandler.readNote(NoteList.Filename), NoteList.Filename);
         TextAreaComponent TextArea = Components.textArea(Sizing.fixed(220), Sizing.fixed(200),  NoteDataHandler.readNote(Note.getFilename()));
         Component FilenameLabel = Components.label(Text.literal(decideLabelContent(Note.getFilename().replace(".txt", "")))).horizontalSizing(Sizing.fixed(130));
@@ -52,7 +57,7 @@ public class EditNote extends BaseOwoScreen<FlowLayout> {
         SaveButton.margins(Insets.of(6));
         FilenameLabel.margins(Insets.of(11));
         rootComponent
-                .surface(IngameChecks.getSurface())
+                .surface(surface)
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER);
 

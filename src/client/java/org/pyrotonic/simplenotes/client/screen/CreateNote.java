@@ -35,6 +35,10 @@ public class CreateNote extends BaseOwoScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
+        final Surface surface;
+        if (!SimplenotesClient.IsIngame) {
+            surface = (owoUIDrawContext, parentComponent) -> ROTATING_PANORAMA_RENDERER.render(owoUIDrawContext, this.width, this.height, 255, this.getPanoramaTickDelta());
+        } else {surface = IngameChecks.getSurface();}
         final String ContentPlaceholder = "Enter content here!";
 
         TextAreaComponent TextArea = Components.textArea(Sizing.fixed(220), Sizing.fixed(200), ContentPlaceholder);
@@ -63,7 +67,7 @@ public class CreateNote extends BaseOwoScreen<FlowLayout> {
         SaveButton.margins(Insets.of(6));
         FilenameLabel.margins(Insets.of(11));
         rootComponent
-                .surface(IngameChecks.getSurface())
+                .surface(surface)
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER);
 

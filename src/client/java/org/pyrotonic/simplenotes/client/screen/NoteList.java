@@ -9,6 +9,7 @@ import io.wispforest.owo.ui.core.*;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.client.NoteDataHandler;
+import org.pyrotonic.simplenotes.client.SimplenotesClient;
 import org.pyrotonic.simplenotes.client.utils.IngameChecks;
 
 public class NoteList extends BaseOwoScreen<FlowLayout> {
@@ -20,9 +21,13 @@ public class NoteList extends BaseOwoScreen<FlowLayout> {
     }
     @Override
     protected void build(FlowLayout rootComponent) {
+        final Surface surface;
+        if (!SimplenotesClient.IsIngame) {
+            surface = (owoUIDrawContext, parentComponent) -> ROTATING_PANORAMA_RENDERER.render(owoUIDrawContext, this.width, this.height, 255, this.getPanoramaTickDelta());
+        } else {surface = IngameChecks.getSurface();}
         String[] Filenames = NoteDataHandler.readFilenames();
         rootComponent
-            .surface(IngameChecks.getSurface())
+            .surface(surface)
             .horizontalAlignment(HorizontalAlignment.CENTER)
             .verticalAlignment(VerticalAlignment.CENTER);
 

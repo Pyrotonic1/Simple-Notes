@@ -11,10 +11,12 @@ import org.jetbrains.annotations.NotNull;
 import org.pyrotonic.simplenotes.client.SimplenotesClient;
 
 public class MainMenu extends BaseOwoScreen<FlowLayout> {
+
     @Override
     protected @NotNull OwoUIAdapter<FlowLayout> createAdapter() {
         return OwoUIAdapter.create(this, Containers::verticalFlow);
     }
+
     @Override
     protected void build(FlowLayout rootComponent) {
         Component MenuTitle = Components.texture(Identifier.of("simplenotes", "menutitle.png"), 460, 90, 460, 90, 460, 90)
@@ -55,7 +57,7 @@ public class MainMenu extends BaseOwoScreen<FlowLayout> {
         rootComponent
                 .child(MenuTitle)
                 .child(MenuButtons)
-                .surface(Surface.OPTIONS_BACKGROUND)
+                .surface((owoUIDrawContext, parentComponent) -> ROTATING_PANORAMA_RENDERER.render(owoUIDrawContext, this.width, this.height, 255, this.getPanoramaTickDelta()))
                 .verticalAlignment(VerticalAlignment.CENTER)
                 .horizontalAlignment(HorizontalAlignment.CENTER);
 

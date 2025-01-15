@@ -17,6 +17,7 @@ import io.wispforest.owo.ui.core.Surface;
 import io.wispforest.owo.ui.core.VerticalAlignment;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
+import org.pyrotonic.simplenotes.client.SimplenotesClient;
 import org.pyrotonic.simplenotes.client.utils.IngameChecks;
 
 public class DeleteNote extends BaseOwoScreen<FlowLayout> {
@@ -28,6 +29,10 @@ public class DeleteNote extends BaseOwoScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
+        final Surface surface;
+        if (!SimplenotesClient.IsIngame) {
+            surface = (owoUIDrawContext, parentComponent) -> ROTATING_PANORAMA_RENDERER.render(owoUIDrawContext, this.width, this.height, 255, this.getPanoramaTickDelta());
+        } else {surface = IngameChecks.getSurface();}
         NoteDataHandler Note = new NoteDataHandler(NoteDataHandler.readNote(NoteList.Filename), NoteList.Filename);
         LabelComponent Label = Components.label(Text.literal("Are you sure?"));
         ButtonComponent Yes = Components.button(Text.literal("Yes"), buttonComponent -> {
@@ -70,7 +75,7 @@ public class DeleteNote extends BaseOwoScreen<FlowLayout> {
                 .child(Container)
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER)
-                .surface(IngameChecks.getSurface());
+                .surface(surface);
     }
     
 }
