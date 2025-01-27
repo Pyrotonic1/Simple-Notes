@@ -1,0 +1,61 @@
+package org.pyrotonic.simplenotes.client.screen;
+
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import org.pyrotonic.simplenotes.client.SimplenotesClient;
+import org.pyrotonic.simplenotes.client.component.TransparantButtonWidget;
+import org.pyrotonic.simplenotes.client.exceptions.NoteNameNotSpecifiedException;
+
+public class MainMenuScreen extends Screen {
+    private static final MinecraftClient client = MinecraftClient.getInstance();
+
+    Screen parent;
+
+    public MainMenuScreen(Screen parent) {
+        super(Text.translatable("screen.recordium.mainmenu"));
+        this.parent = parent;
+    }
+
+    private static Identifier texture;
+    private TransparantButtonWidget openNote;
+    private TransparantButtonWidget createNote;
+    private TransparantButtonWidget exit;
+
+    private void initComponents() {
+        texture = Identifier.of("simplenotes", "menutitle.png");
+
+        createNote = new TransparantButtonWidget((width / 2 - 38), 130, 76, 20, Text.translatable(SimplenotesClient.CREATE_NOTE_BUTTON), button -> {
+            try {
+                client.setScreen(new NoteEditorScreen(true));
+            } catch (NoteNameNotSpecifiedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        openNote = new TransparantButtonWidget((width / 2 - 38), 160, 76, 20, Text.translatable(SimplenotesClient.OPEN_NOTE_BUTTON), button -> {
+
+        });
+
+        exit = new TransparantButtonWidget((width / 2 - 38), 190, 76, 20, Text.translatable(SimplenotesClient.EXIT_BUTTON), button -> client.setScreen(parent));
+    }
+
+    @Override
+    protected void init() {
+        initComponents();
+
+        this.addDrawableChild(createNote);
+        this.addDrawableChild(openNote);
+        this.addDrawableChild(exit);
+    }
+
+    @Override
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.render(context, mouseX, mouseY, delta);
+
+        context.drawTexture(RenderLayer::getGuiTextured, texture, (width / 2 - 195), 30, 390, 60, 390, 60, 390, 60);
+    }
+}
