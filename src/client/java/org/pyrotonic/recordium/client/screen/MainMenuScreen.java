@@ -1,4 +1,4 @@
-package org.pyrotonic.simplenotes.client.screen;
+package org.pyrotonic.recordium.client.screen;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -6,9 +6,9 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.pyrotonic.simplenotes.client.SimplenotesClient;
-import org.pyrotonic.simplenotes.client.component.TransparantButtonWidget;
-import org.pyrotonic.simplenotes.client.exceptions.NoteNameNotSpecifiedException;
+import org.pyrotonic.recordium.client.RecordiumClient;
+import org.pyrotonic.recordium.client.component.TransparantButtonWidget;
+import org.pyrotonic.recordium.client.exceptions.NoteNameNotSpecifiedException;
 
 public class MainMenuScreen extends Screen {
     private static final MinecraftClient client = MinecraftClient.getInstance();
@@ -26,9 +26,9 @@ public class MainMenuScreen extends Screen {
     private TransparantButtonWidget exit;
 
     private void initComponents() {
-        texture = Identifier.of("simplenotes", "menutitle.png");
+        texture = Identifier.of("recordium", "menutitle.png");
 
-        createNote = new TransparantButtonWidget((width / 2 - 38), 130, 76, 20, Text.translatable(SimplenotesClient.CREATE_NOTE_BUTTON), button -> {
+        createNote = new TransparantButtonWidget((width / 2 - 38), 130, 76, 20, Text.translatable(RecordiumClient.CREATE_NOTE_BUTTON), button -> {
             try {
                 client.setScreen(new NoteEditorScreen(true));
             } catch (NoteNameNotSpecifiedException e) {
@@ -36,11 +36,11 @@ public class MainMenuScreen extends Screen {
             }
         });
 
-        openNote = new TransparantButtonWidget((width / 2 - 38), 160, 76, 20, Text.translatable(SimplenotesClient.OPEN_NOTE_BUTTON), button -> {
+        openNote = new TransparantButtonWidget((width / 2 - 38), 160, 76, 20, Text.translatable(RecordiumClient.OPEN_NOTE_BUTTON), button -> {
 
         });
 
-        exit = new TransparantButtonWidget((width / 2 - 38), 190, 76, 20, Text.translatable(SimplenotesClient.EXIT_BUTTON), button -> client.setScreen(parent));
+        exit = new TransparantButtonWidget((width / 2 - 38), 190, 76, 20, Text.translatable(RecordiumClient.EXIT_BUTTON), button -> client.setScreen(parent));
     }
 
     @Override

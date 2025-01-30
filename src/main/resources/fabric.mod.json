@@ -1,31 +1,31 @@
 {
   "schemaVersion": 1,
-  "id": "simplenotes",
+  "id": "recordium",
   "version": "${version}",
 
-  "name": "Simple Notes",
-  "description": "A simple mod for making simple notes.",
+  "name": "Recordium",
+  "description": "A mod for recording things, like notes.",
   "authors": ["Pyrotonic"],
   "contact": {
     "homepage": "https://modrinth.com/project/simple-notes",
-    "sources": "https://github.com/Pyrotonic1/redstone-tools",
-    "issues": "https://github.com/Pyrotonic1/redstone-tools/issues"
+    "sources": "https://github.com/Pyrotonic1/simple-notes",
+    "issues": "https://github.com/Pyrotonic1/simple-notes/issues"
   },
 
   "license": "LGPL-2.1-only",
-  "icon": "assets/simplenotes/icon.png",
+  "icon": "assets/recordium/icon.png",
 
   "environment": "client",
   "entrypoints": {
-    "client": ["org.pyrotonic.simplenotes.client.SimplenotesClient"],
-    "main": ["org.pyrotonic.simplenotes.Simplenotes"]
+    "client": ["org.pyrotonic.recordium.client.RecordiumClient"],
+    "main": ["org.pyrotonic.recordium.Recordium"]
   },
 
 
   "mixins": [
-    "simplenotes.mixins.json",
+    "recordium.mixins.json",
     {
-      "config": "simplenotes.client.mixins.json",
+      "config": "recordium.client.mixins.json",
       "environment": "client"
     }
   ],
@@ -40,9 +40,9 @@
       "links": {
         "modmenu.discord": "https://discord.gg/H7WbRGDwJJ"
       },
-      "id": "simplenotes",
-      "name": "Simple Notes",
-      "icon": "assets/simplenotes/icon.png"
+      "id": "recordium",
+      "name": "Recordium",
+      "icon": "assets/recordium/icon.png"
     }
   }
 }

@@ -1,4 +1,4 @@
-package org.pyrotonic.simplenotes.client.exceptions;
+package org.pyrotonic.recordium.client.exceptions;
 
 public class NoteNameNotSpecifiedException extends Exception {
 

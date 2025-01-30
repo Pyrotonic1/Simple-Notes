@@ -1,4 +1,4 @@
-package org.pyrotonic.simplenotes.client.screen;
+package org.pyrotonic.recordium.client.screen;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -6,11 +6,11 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
-import org.pyrotonic.simplenotes.client.NoteDataHandler;
-import org.pyrotonic.simplenotes.client.SimplenotesClient;
-import org.pyrotonic.simplenotes.client.component.TextWidget;
-import org.pyrotonic.simplenotes.client.component.TransparantButtonWidget;
-import org.pyrotonic.simplenotes.client.component.TransparantTextFieldWidget;
+import org.pyrotonic.recordium.client.NoteDataHandler;
+import org.pyrotonic.recordium.client.RecordiumClient;
+import org.pyrotonic.recordium.client.component.TextWidget;
+import org.pyrotonic.recordium.client.component.TransparantButtonWidget;
+import org.pyrotonic.recordium.client.component.TransparantTextFieldWidget;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -31,28 +31,28 @@ public class RenameScreen extends Screen {
     }
 
     private void initComponents() {
-        Text text = Text.translatable(SimplenotesClient.KEY_RENAMENOTE_TEXTWIDGET);
+        Text text = Text.translatable(RecordiumClient.KEY_RENAMENOTE_TEXTWIDGET);
         int textWidth = textRenderer.getWidth(text) / 2;
         textWidget = new TextWidget((width / 2) - textWidth, (height / 2) - 50, 1.0f, text.getString());
 
-        textField = new TransparantTextFieldWidget(textRenderer, ((width / 2) - 80) - 33, (height / 2) + 1, 144, 18, Text.translatable(SimplenotesClient.KEY_TEXTFIELD_PLACEHOLDER), Text.empty());
+        textField = new TransparantTextFieldWidget(textRenderer, ((width / 2) - 80) - 33, (height / 2) + 1, 144, 18, Text.translatable(RecordiumClient.KEY_TEXTFIELD_PLACEHOLDER), Text.empty());
 
         NoteDataHandler Note = new NoteDataHandler(NoteDataHandler.readNote(filename), filename);
-        saveButton = new TransparantButtonWidget(((textField.getX() + textField.getWidth()) + 5), (this.height / 2), 75, 20, Text.translatable(SimplenotesClient.RENAME_BUTTON), button -> {
+        saveButton = new TransparantButtonWidget(((textField.getX() + textField.getWidth()) + 5), (this.height / 2), 75, 20, Text.translatable(RecordiumClient.RENAME_BUTTON), button -> {
             try {
                 if (Objects.equals(filename, textField.getText())) {
                     client.getToastManager().clear();
                     client.getToastManager().add(
-                            SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.translatable(SimplenotesClient.TOAST_FAILURE), Text.translatable(SimplenotesClient.TOAST_RENAME_DUPLICATE, filename)));
+                            SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.translatable(RecordiumClient.TOAST_FAILURE), Text.translatable(RecordiumClient.TOAST_RENAME_DUPLICATE, filename)));
                 } else if (Note.saveFilename(filename, textField.getText())) {
                     client.getToastManager().clear();
                     client.getToastManager().add(
-                            SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.translatable(SimplenotesClient.TOAST_SUCCESS), Text.translatable(SimplenotesClient.TOAST_RENAME_SUCCESS, filename, textField.getText())));
+                            SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.translatable(RecordiumClient.TOAST_SUCCESS), Text.translatable(RecordiumClient.TOAST_RENAME_SUCCESS, filename, textField.getText())));
                     client.setScreen(new NoteEditorScreen(false, textField.getText()));
                 } else if (!Note.saveFilename(filename, textField.getText())) {
                     client.getToastManager().clear();
                     client.getToastManager().add(
-                            SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.translatable(SimplenotesClient.TOAST_FAILURE), Text.translatable(SimplenotesClient.TOAST_RENAME_FAILURE, filename, textField.getText())));
+                            SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE, Text.translatable(RecordiumClient.TOAST_FAILURE), Text.translatable(RecordiumClient.TOAST_RENAME_FAILURE, filename, textField.getText())));
                     client.setScreen(new NoteEditorScreen(false, textField.getText()));
                 }
             } catch (IOException ignored) {}

@@ -1,4 +1,4 @@
-package org.pyrotonic.simplenotes.client;
+package org.pyrotonic.recordium.client;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
-import org.pyrotonic.simplenotes.Simplenotes;
+import org.pyrotonic.recordium.Recordium;
 
 public class NoteDataHandler {
     static String Content;
@@ -32,41 +32,41 @@ public class NoteDataHandler {
             if (filename.contains(".txt")) {
                 filename = filename.replace(".txt", "");
             }
-            FileWriter note = new FileWriter(SimplenotesClient.NOTE_DIRECTORY_PATH + filename + ".txt");
+            FileWriter note = new FileWriter(RecordiumClient.NOTE_DIRECTORY_PATH + filename + ".txt");
             note.write(content);
             note.close();
         } catch (FileNotFoundException err) {
-            Simplenotes.LOGGER.error("The note was not found. Try restarting.");
+            Recordium.LOGGER.error("The note was not found. Try restarting.");
             return false;
         } catch (IOException err) {
-            Simplenotes.LOGGER.error("An IOException error occurred while saving the file.", err.fillInStackTrace());
+            Recordium.LOGGER.error("An IOException error occurred while saving the file.", err.fillInStackTrace());
             return false;
         }
         return true;
     }
     
     public Boolean saveFilename(String oldFilename, String newFilename) throws IOException {
-    File OldFile = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + oldFilename);
-    File NewFile = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + newFilename);
+    File OldFile = new File(RecordiumClient.NOTE_DIRECTORY_PATH + oldFilename);
+    File NewFile = new File(RecordiumClient.NOTE_DIRECTORY_PATH + newFilename);
 
     try {
         FileUtils.moveFile(OldFile, new File(NewFile + ".txt"));
         } catch (FileNotFoundException err) {
-            Simplenotes.LOGGER.error("The file you tried to rename could not be found.", err.fillInStackTrace());
+            Recordium.LOGGER.error("The file you tried to rename could not be found.", err.fillInStackTrace());
             return false;
         } catch (FileAlreadyExistsException err) {
-            Simplenotes.LOGGER.error("There is a file that already has that name.", err.fillInStackTrace());
+            Recordium.LOGGER.error("There is a file that already has that name.", err.fillInStackTrace());
         }
         return true;
     } 
 
     public Boolean deleteFile(String note) {
-        File Note = new File(SimplenotesClient.NOTE_DIRECTORY_PATH + note);
+        File Note = new File(RecordiumClient.NOTE_DIRECTORY_PATH + note);
 
         try {
             FileUtils.delete(Note);
         } catch (IOException err) {
-            Simplenotes.LOGGER.error("An IOException occurred while deleting the file.", err.fillInStackTrace());
+            Recordium.LOGGER.error("An IOException occurred while deleting the file.", err.fillInStackTrace());
             return false;
         }
         return true;
@@ -76,9 +76,9 @@ public class NoteDataHandler {
         String data = "";
         try {
             data = new String(
-                    Files.readAllBytes(Paths.get(SimplenotesClient.NOTE_DIRECTORY_PATH + filename)));
+                    Files.readAllBytes(Paths.get(RecordiumClient.NOTE_DIRECTORY_PATH + filename)));
         } catch (IOException err) {
-            Simplenotes.LOGGER.error("An IOException error occurred while reading the file.", err.fillInStackTrace());
+            Recordium.LOGGER.error("An IOException error occurred while reading the file.", err.fillInStackTrace());
         }
         return data;
         }

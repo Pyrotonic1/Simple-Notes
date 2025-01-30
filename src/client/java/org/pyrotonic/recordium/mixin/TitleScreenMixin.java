@@ -1,4 +1,4 @@
-package org.pyrotonic.simplenotes.mixin;
+package org.pyrotonic.recordium.mixin;
 
 
 import net.minecraft.client.gui.screen.ButtonTextures;
@@ -6,8 +6,8 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.text.Text;
-import org.pyrotonic.simplenotes.client.SimplenotesClient;
-import org.pyrotonic.simplenotes.client.screen.MainMenuScreen;
+import org.pyrotonic.recordium.client.RecordiumClient;
+import org.pyrotonic.recordium.client.screen.MainMenuScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,11 +22,11 @@ public abstract class TitleScreenMixin extends Screen {
 
     @Inject(at = @At("RETURN"), method = "addNormalWidgets")
     private void addCustomButton(int y, int spacingY, CallbackInfoReturnable<Integer> cir) {
-        ButtonTextures ButtonIcon = SimplenotesClient.MAIN_MENU_BUTTON_TEXTURE;
+        ButtonTextures ButtonIcon = RecordiumClient.MAIN_MENU_BUTTON_TEXTURE;
         this.addDrawableChild(new TexturedButtonWidget((this.width / 2 - 122), (y + spacingY) - 48, 20, 20, ButtonIcon, button -> {
             assert client != null;
             assert client.currentScreen != null;
-            SimplenotesClient.IsIngame = false;
+            RecordiumClient.IsIngame = false;
             client.setScreen(new MainMenuScreen(this));
         }));
     }

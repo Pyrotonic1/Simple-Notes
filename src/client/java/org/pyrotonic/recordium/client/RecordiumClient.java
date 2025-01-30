@@ -1,4 +1,4 @@
-package org.pyrotonic.simplenotes.client;
+package org.pyrotonic.recordium.client;
 
 
 import net.fabricmc.api.ClientModInitializer;
@@ -10,11 +10,11 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
-import org.pyrotonic.simplenotes.Simplenotes;
+import org.pyrotonic.recordium.Recordium;
 
 import java.io.File;
 
-public class SimplenotesClient implements ClientModInitializer {
+public class RecordiumClient implements ClientModInitializer {
     public static final MinecraftClient client = MinecraftClient.getInstance();
     public static boolean IsCreated;
     public static boolean IsIngame;
@@ -26,9 +26,9 @@ public class SimplenotesClient implements ClientModInitializer {
     public static final String SAVE_BUTTON = "button.save";
     public static final String CREATE_NOTE_BUTTON = "button.createnote";
     public static final String OPEN_NOTE_BUTTON= "button.opennote";
-    public static final String KEY_CREATE_NOTE = "key.simplenotes.createnote";
-    public static final String KEY_CATEGORY_SIMPLENOTES = "key.category.simplenotes.notes";
-    public static final String KEY_OPEN_NOTE_SELECTOR = "key.simplenotes.noteselector";
+    public static final String KEY_CREATE_NOTE = "key.recordium.createnote";
+    public static final String KEY_CATEGORY_SIMPLENOTES = "key.category.recordium.notes";
+    public static final String KEY_OPEN_NOTE_SELECTOR = "key.recordium.noteselector";
     public static final String KEY_TEXT_EDITBOX_PLACEHOLDER = "text.editbox.placeholder";
     public static final String KEY_TEXTFIELD_PLACEHOLDER = "text.createnote.textfield.placeholder";
     public static final String KEY_RENAMENOTE_TEXTWIDGET = "text.renamenote.textwidget";
@@ -40,19 +40,19 @@ public class SimplenotesClient implements ClientModInitializer {
     public static final String TOAST_SAVE_SUCCESS = "toast.save.success";
     public static final String TOAST_SAVE_FAILURE = "toast.save.failure";
     public static final String TOAST_SAVE_DUPLICATE = "toast.save.duplicate";
-    public static final String NOTE_DIRECTORY_PATH = "simplenotes/notes/";
+    public static final String NOTE_DIRECTORY_PATH = "recordium/notes/";
     public static final ButtonTextures MAIN_MENU_BUTTON_TEXTURE = new ButtonTextures(
-        Identifier.of("simplenotes", "main_menu/unfocused"),
-        Identifier.of("simplenotes", "main_menu/focused")
+        Identifier.of("recordium", "main_menu/unfocused"),
+        Identifier.of("recordium", "main_menu/focused")
     );
     public static final ButtonTextures TRANSPARANT_BUTTON_TEXTURES = new ButtonTextures(
-            Identifier.of("simplenotes:widget/transparant_button"),
-            Identifier.of("simplenotes:widget/transparant_button_disabled"),
-            Identifier.of("simplenotes:widget/transparant_button_highlighted")
+            Identifier.of("recordium:widget/transparant_button"),
+            Identifier.of("recordium:widget/transparant_button_disabled"),
+            Identifier.of("recordium:widget/transparant_button_highlighted")
     );
     public static final ButtonTextures EDIT_BOX_TEXTURES = new ButtonTextures(
-            Identifier.of( "simplenotes:widget/transparant_textfield"),
-            Identifier.of("simplenotes:widget/transparant_textfield_highlighted")
+            Identifier.of( "recordium:widget/transparant_textfield"),
+            Identifier.of("recordium:widget/transparant_textfield_highlighted")
     );
     @Override
     public void onInitializeClient() {
@@ -83,7 +83,7 @@ public class SimplenotesClient implements ClientModInitializer {
         });
         File NoteDirectory = new File(NOTE_DIRECTORY_PATH);
         if (NoteDirectory.mkdirs()) {
-            Simplenotes.LOGGER.info("Directories created!");
+            Recordium.LOGGER.info("Directories created!");
         }
     }
 }

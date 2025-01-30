@@ -1,4 +1,4 @@
-package org.pyrotonic.simplenotes.client.component;
+package org.pyrotonic.recordium.client.component;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -9,7 +9,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
-import org.pyrotonic.simplenotes.client.SimplenotesClient;
+import org.pyrotonic.recordium.client.RecordiumClient;
 
 public class TransparantTextFieldWidget extends EditBoxWidget {
     private final TextRenderer textRenderer;
@@ -33,7 +33,7 @@ public class TransparantTextFieldWidget extends EditBoxWidget {
     @Override
     public void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
         if (this.visible) {
-            Identifier identifier = SimplenotesClient.EDIT_BOX_TEXTURES.get(this.isNarratable(), this.isFocused());
+            Identifier identifier = RecordiumClient.EDIT_BOX_TEXTURES.get(this.isNarratable(), this.isFocused());
             context.drawGuiTexture(RenderLayer::getGuiTextured, identifier, this.getX(), this.getY(), this.getWidth(), this.getHeight());
             context.enableScissor(this.getX() + 1, this.getY() + 1, this.getX() + this.width - 1, this.getY() + this.height - 1);
             context.getMatrices().push();

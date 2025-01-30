@@ -1,4 +1,4 @@
-package org.pyrotonic.simplenotes.client.component;
+package org.pyrotonic.recordium.client.component;
 
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.*;
@@ -6,7 +6,7 @@ import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Colors;
 
-import static org.pyrotonic.simplenotes.client.SimplenotesClient.client;
+import static org.pyrotonic.recordium.client.RecordiumClient.client;
 
 public class TextWidget implements Drawable, Element, Narratable, Selectable {
     private static final TextRenderer textRenderer = client.textRenderer;
